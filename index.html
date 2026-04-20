@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mikhail Mikhalev</title>
+  <meta
+    name="description"
+    content="Mikhail Mikhalev — Software engineer focused on distributed systems, logistics optimization, and technical publications."
+  />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #121936;
+      --panel: rgba(255, 255, 255, 0.06);
+      --panel-strong: rgba(255, 255, 255, 0.1);
+      --text: #edf2ff;
+      --muted: #b8c2e8;
+      --subtle: #8fa0d1;
+      --line: rgba(255, 255, 255, 0.12);
+      --accent: #8fb8ff;
+      --accent-2: #c7b5ff;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+      --maxw: 980px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(143, 184, 255, 0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(199, 181, 255, 0.16), transparent 24%),
+        linear-gradient(180deg, #0a0f1d 0%, #0c1122 100%);
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      width: min(var(--maxw), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(10, 15, 29, 0.72);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .topbar-inner {
+      width: min(var(--maxw), calc(100% - 32px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+    }
+
+    .brand {
+      font-size: 0.98rem;
+      font-weight: 650;
+      letter-spacing: 0.01em;
+    }
+
+    .nav {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .hero {
+      padding: 72px 0 34px;
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 40px 34px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(143, 184, 255, 0.1), transparent 34%),
+        linear-gradient(300deg, rgba(199, 181, 255, 0.08), transparent 30%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 10px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+      margin-bottom: 18px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.3rem, 6vw, 4.2rem);
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+      max-width: 12ch;
+    }
+
+    .hero-subtitle {
+      margin: 16px 0 0;
+      font-size: clamp(1.04rem, 2vw, 1.24rem);
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    .hero-links {
+      margin-top: 26px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      font-weight: 560;
+      transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .button:hover {
+      text-decoration: none;
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.18);
+    }
+
+    .button.primary {
+      background: linear-gradient(135deg, rgba(143,184,255,0.22), rgba(199,181,255,0.18));
+    }
+
+    main {
+      padding-bottom: 64px;
+    }
+
+    section {
+      margin-top: 26px;
+    }
+
+    .section-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 1.08rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--subtle);
+    }
+
+    .section-note {
+      color: var(--subtle);
+      font-size: 0.94rem;
+    }
+
+    .about {
+      font-size: 1.04rem;
+      color: var(--text);
+    }
+
+    .about p {
+      margin: 0;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .publication {
+      padding: 18px 18px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .publication:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .publication h3 {
+      margin: 0 0 6px;
+      font-size: 1.06rem;
+      line-height: 1.35;
+      font-weight: 650;
+    }
+
+    .meta {
+      font-size: 0.93rem;
+      color: var(--subtle);
+      margin-bottom: 8px;
+    }
+
+    .publication p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 20px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact-item {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .contact-label {
+      display: block;
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--subtle);
+      margin-bottom: 4px;
+    }
+
+    .footer {
+      color: var(--subtle);
+      font-size: 0.92rem;
+      padding: 16px 0 8px;
+      text-align: center;
+    }
+
+    @media (max-width: 800px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        padding: 30px 22px;
+      }
+
+      .section-card {
+        padding: 22px;
+      }
+
+      .topbar-inner {
+        align-items: flex-start;
+        gap: 12px;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">Mikhail Mikhalev</div>
+      <nav class="nav" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#publications">Publications</a>
+        <a href="#media">Articles & Media</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="hero">
+      <div class="hero-card">
+        <div class="eyebrow">Software Engineer · Distributed Systems · Logistics Optimization</div>
+        <h1>Mikhail Mikhalev</h1>
+        <p class="hero-subtitle">
+          Software engineer focused on large-scale distributed systems, transportation and logistics
+          optimization, and applied technical research. This page highlights selected publications,
+          articles, and professional contact information.
+        </p>
+        <div class="hero-links">
+          <a class="button primary" href="mailto:your.email@example.com">Email</a>
+          <a class="button" href="https://www.linkedin.com/in/your-linkedin/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <main>
+      <section id="about">
+        <div class="section-card">
+          <div class="section-header">
+            <h2 class="section-title">About</h2>
+          </div>
+          <div class="about">
+            <p>
+              I am a software engineer with more than 15 years of experience building backend and
+              distributed systems across e-commerce, logistics, delivery platforms, and large-scale
+              internet products. My work has focused on system design, optimization, performance,
+              reliability, and translating complex operational problems into production software.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="publications">
+        <div class="section-card">
+          <div class="section-header">
+            <h2 class="section-title">Selected Publications</h2>
+            <div class="section-note">Primary publications and technical articles</div>
+          </div>
+
+          <div class="grid">
+            <article class="publication">
+              <h3>
+                <a href="https://pro.rbc.ru/demo/69424f689a79470ec6921137?from=microservice_business_land" target="_blank" rel="noopener noreferrer">
+                  Как организовать среднюю милю доставки: уроки Amazon
+                </a>
+              </h3>
+              <div class="meta">РБК Про</div>
+              <p>
+                Article on middle-mile delivery organization and practical lessons from large-scale
+                logistics systems.
+              </p>
+            </article>
+
+            <article class="publication">
+              <h3>
+                <a href="https://naked-science.ru/community/1153404" target="_blank" rel="noopener noreferrer">
+                  Почему идеальных маршрутов не существует: как математика справляется с хаосом логистики
+                </a>
+              </h3>
+              <div class="meta">Naked Science</div>
+              <p>
+                A discussion of routing complexity, optimization trade-offs, and the mathematical
+                realities behind transportation planning.
+              </p>
+            </article>
+
+            <article class="publication">
+              <h3>
+                <a href="https://apni.ru/article/13917-razrabotka-zamknutyh-ai-instrumentov-dlya-upravleniya-proektami-v-usloviyah-strogoj-konfidencialnosti" target="_blank" rel="noopener noreferrer">
+                  Разработка замкнутых AI-инструментов для управления проектами в условиях строгой конфиденциальности
+                </a>
+              </h3>
+              <div class="meta">АПНИ</div>
+              <p>
+                Publication on building closed AI tools for project management under strict
+                confidentiality constraints.
+              </p>
+            </article>
+
+            <article class="publication">
+              <h3>
+                <a href="https://7universum.com/ru/tech/archive/item/21827" target="_blank" rel="noopener noreferrer">
+                  Методология разработки и верификации мультивариантных алгоритмов в условиях неопределенности
+                </a>
+              </h3>
+              <div class="meta">Universum: Technical Sciences</div>
+              <p>
+                Methodology-focused publication on designing and verifying multivariable algorithms
+                under uncertainty.
+              </p>
+            </article>
+
+            <article class="publication">
+              <h3>
+                <a href="https://trends.rbc.ru/trends/industry/69b2fe5a9a79474a169e6ce3" target="_blank" rel="noopener noreferrer">
+                  Инженерия данных в логистике: как симуляции расширяют моделирование
+                </a>
+              </h3>
+              <div class="meta">РБК Тренды</div>
+              <p>
+                Article on data engineering in logistics and the role of simulation in extending
+                operational modeling.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="media">
+        <div class="section-card">
+          <div class="section-header">
+            <h2 class="section-title">Articles & Media</h2>
+            <div class="section-note">Interviews, features, and public-facing materials</div>
+          </div>
+
+          <div class="grid">
+            <article class="publication">
+              <h3>
+                <a href="https://www.tadviser.ru/index.php/%D0%9D%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8:%D0%92%D1%8B%D1%87%D0%B8%D1%81%D0%BB%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F_%D0%BB%D0%BE%D0%B3%D0%B8%D1%81%D1%82%D0%B8%D0%BA%D0%B0_%D0%B2_e-commerce:_%D0%BA%D0%B0%D0%BA_%D0%B8%D0%BD%D0%B6%D0%B5%D0%BD%D0%B5%D1%80_%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82_%D0%BE%D0%BF%D1%82%D0%B8%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8E_%D1%82%D1%80%D0%B0%D0%BD%D1%81%D0%BF%D0%BE%D1%80%D1%82%D0%BD%D1%8B%D1%85_%D1%81%D0%B5%D1%82%D0%B5%D0%B9_%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%BD%D0%B5%D1%82-%D0%BC%D0%B0%D1%81%D1%88%D1%82%D0%B0%D0%B1%D0%B0" target="_blank" rel="noopener noreferrer">
+                  Вычислительная логистика в e-commerce: как инженер строит оптимизацию транспортных сетей интернет-масштаба
+                </a>
+              </h3>
+              <div class="meta">TAdviser</div>
+              <p>
+                Feature article on computational logistics and engineering work behind internet-scale
+                transportation optimization.
+              </p>
+            </article>
+
+            <article class="publication">
+              <h3>
+                <a href="https://www.eg.ru/society/5344672-mihail-mihalev-rasskazal-o-tom-kak-algoritmy-i-ai-menyayut-transportnye-seti-016-13/" target="_blank" rel="noopener noreferrer">
+                  О том, как алгоритмы и AI меняют транспортные сети в E-commerce
+                </a>
+              </h3>
+              <div class="meta">Экспресс-Газета</div>
+              <p>
+                Interview and media feature on algorithms, AI, and their impact on transportation
+                networks in e-commerce.
+              </p>
+            </article>
+
+            <article class="publication">
+              <h3>
+                <a href="https://www.cnews.ru/articles/2026-03-10_mihail_mihalevamazon_inzhener_dolzhen" target="_blank" rel="noopener noreferrer">
+                  Михаил Михалев, Amazon: Инженер должен оценивать последствия решений на уровне всей системы
+                </a>
+              </h3>
+              <div class="meta">CNews</div>
+              <p>
+                Public interview on engineering judgment, systems thinking, and evaluating technical
+                decisions at whole-system level.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="section-card">
+          <div class="section-header">
+            <h2 class="section-title">Contact</h2>
+          </div>
+
+          <div class="two-col">
+            <div class="contact-list">
+              <div class="contact-item">
+                <span class="contact-label">Email</span>
+                <a href="mailto:m.yu.mikhalev+github@gmail.com">m.yu.mikhalev@gmail.com</a>
+              </div>
+
+              <div class="contact-item">
+                <span class="contact-label">LinkedIn</span>
+                <a href="https://www.linkedin.com/in/mikhail-mikhalev" target="_blank" rel="noopener noreferrer">
+                  linkedin.com/in/mikhail-mikhalev
+                </a>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <span class="contact-label">Note</span>
+              This page is intended as a concise public profile centered on publications, technical
+              writing, and professional contact information.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer">
+        © <span id="year">2026</span> Mikhail Mikhalev
+      </div>
+    </main>
+  </div>
+</body>
+</html>
